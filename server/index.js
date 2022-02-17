@@ -3,7 +3,8 @@ const express = require("express");
 const debug = require("debug")("app:serverUtils");
 const morgan = require("morgan");
 const { assesParams } = require("../utils/paramUtils");
-const generalError = require("./errorHandlers");
+const generalError = require("../errorHandles/errorHandlers");
+const errorTypes = require("../errorHandles/errorTypes");
 
 const app = express();
 
@@ -24,7 +25,7 @@ app.use(morgan("dev"));
 app.use((req, res, next) => {
   if (req.method !== "GET") {
     const error = new Error("Metod is not get");
-    error.methodError = true;
+    error.type = errorTypes.methodError;
     next(error);
   }
   next();

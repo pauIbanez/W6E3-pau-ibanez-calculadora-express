@@ -2,6 +2,7 @@ const chalk = require("chalk");
 const express = require("express");
 const debug = require("debug")("app:serverUtils");
 const morgan = require("morgan");
+const generalError = require("./errorHandlers");
 
 const app = express();
 
@@ -25,5 +26,7 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+app.use(generalError);
 
 module.exports = startServer;

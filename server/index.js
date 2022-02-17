@@ -2,9 +2,10 @@ const chalk = require("chalk");
 const express = require("express");
 const debug = require("debug")("app:serverUtils");
 const morgan = require("morgan");
-const { assesParams, params } = require("../utils/paramUtils");
+const { assesParams } = require("../utils/paramUtils");
 const generalError = require("../errorHandles/errorHandlers");
 const errorTypes = require("../errorHandles/errorTypes");
+const calculate = require("../utils/calculate");
 
 const app = express();
 
@@ -19,6 +20,7 @@ const startServer = (port) =>
       reject(error);
     });
   });
+app.use(express.json());
 
 app.use(morgan("dev"));
 
@@ -34,7 +36,11 @@ app.use((req, res, next) => {
 app.use(assesParams);
 
 app.get("/sum", (req, res) => {
-  calculate(params);
+  const result = calculate(req.body.params[0], req.body.params[1], 1);
+  res.json({
+    operation: "sum",
+    result,
+  });
 });
 app.use(generalError);
 

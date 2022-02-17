@@ -23,7 +23,6 @@ const startServer = (port) =>
       reject(error);
     });
   });
-app.use(express.json());
 
 app.use(morgan("dev"));
 
@@ -37,7 +36,7 @@ app.use((req, res, next) => {
 });
 
 app.get("/sum", assesParams, (req, res) => {
-  const result = calculate(req.body.params[0], req.body.params[1], 1);
+  const result = calculate(req.numbers[0], req.numbers[1], 1);
   res.json({
     operation: "sum",
     result,
@@ -45,7 +44,7 @@ app.get("/sum", assesParams, (req, res) => {
 });
 
 app.get("/substraction", assesParams, (req, res) => {
-  const result = calculate(req.body.params[0], req.body.params[1], 2);
+  const result = calculate(req.numbers[0], req.numbers[1], 2);
   res.json({
     operation: "substraction",
     result,
@@ -53,7 +52,7 @@ app.get("/substraction", assesParams, (req, res) => {
 });
 
 app.get("/multiply", assesParams, (req, res) => {
-  const result = calculate(req.body.params[0], req.body.params[1], 3);
+  const result = calculate(req.numbers[0], req.numbers[1], 3);
   res.json({
     operation: "multiply",
     result,
@@ -61,7 +60,7 @@ app.get("/multiply", assesParams, (req, res) => {
 });
 
 app.get("/division", assesParams, (req, res) => {
-  const result = calculate(req.body.params[0], req.body.params[1], 4);
+  const result = calculate(req.numbers[0], req.numbers[1], 4);
   res.json({
     operation: "division",
     result,

@@ -1,7 +1,4 @@
-const debug = require("debug")("app:serverUtils");
-
 const calculate = (a, b, operation) => {
-  debug(a, b, operation);
   switch (operation) {
     case 1:
       return a + b;

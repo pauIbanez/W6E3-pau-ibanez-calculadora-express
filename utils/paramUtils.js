@@ -1,11 +1,7 @@
-const debug = require("debug")("app:paramUtils");
 const errorTypes = require("../errorHandles/errorTypes");
-
-// let params = [];
 
 const assesParams = async (req, res, next) => {
   const recievedParams = req.query;
-  debug(recievedParams);
 
   const params = [];
 
@@ -23,7 +19,6 @@ const assesParams = async (req, res, next) => {
     next(error);
     return;
   }
-  debug(params);
   req.body = { params };
   next();
 };

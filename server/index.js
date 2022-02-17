@@ -3,7 +3,10 @@ const express = require("express");
 const debug = require("debug")("app:serverUtils");
 const morgan = require("morgan");
 const { assesParams } = require("../utils/paramUtils");
-const generalError = require("../errorHandles/errorHandlers");
+const {
+  generalError,
+  resourceNotFound,
+} = require("../errorHandles/errorHandlers");
 const errorTypes = require("../errorHandles/errorTypes");
 const calculate = require("../utils/calculate");
 
@@ -33,9 +36,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(assesParams);
-
-app.get("/sum", (req, res) => {
+app.get("/sum", assesParams, (req, res) => {
   const result = calculate(req.body.params[0], req.body.params[1], 1);
   res.json({
     operation: "sum",
@@ -43,7 +44,7 @@ app.get("/sum", (req, res) => {
   });
 });
 
-app.get("/substraction", (req, res) => {
+app.get("/substraction", assesParams, (req, res) => {
   const result = calculate(req.body.params[0], req.body.params[1], 2);
   res.json({
     operation: "substraction",
@@ -51,7 +52,7 @@ app.get("/substraction", (req, res) => {
   });
 });
 
-app.get("/multiply", (req, res) => {
+app.get("/multiply", assesParams, (req, res) => {
   const result = calculate(req.body.params[0], req.body.params[1], 3);
   res.json({
     operation: "multiply",
@@ -59,13 +60,16 @@ app.get("/multiply", (req, res) => {
   });
 });
 
-app.get("/division", (req, res) => {
+app.get("/division", assesParams, (req, res) => {
   const result = calculate(req.body.params[0], req.body.params[1], 4);
   res.json({
     operation: "division",
     result,
   });
 });
+
+app.use(resourceNotFound);
+
 app.use(generalError);
 
 module.exports = startServer;

@@ -3,6 +3,14 @@ const debug = require("debug")("app:errorHandler");
 
 const errorTypes = require("./errorTypes");
 
+const resourceNotFound = (req, res) => {
+  res.status(404);
+  res.json({
+    error: true,
+    message: "Resource not found",
+  });
+};
+
 // eslint-disable-next-line no-unused-vars
 const generalError = (err, req, res, next) => {
   debug(chalk.redBright(err.message));
@@ -27,4 +35,4 @@ const generalError = (err, req, res, next) => {
       res.status(500).send("Internal Server Error");
   }
 };
-module.exports = generalError;
+module.exports = { generalError, resourceNotFound };

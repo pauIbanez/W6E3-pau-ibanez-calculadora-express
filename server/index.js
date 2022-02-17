@@ -19,4 +19,11 @@ const startServer = (port) =>
 
 app.use(morgan("dev"));
 
+app.use((req, res, next) => {
+  if (req.method !== "GET") {
+    next(new Error("Metod is not get"));
+  }
+  next();
+});
+
 module.exports = startServer;

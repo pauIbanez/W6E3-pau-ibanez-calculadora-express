@@ -1,8 +1,13 @@
+let params;
+
 const assesParams = (req, res, next) => {
   const url = new URL(`http://localhost${req.url}`);
-  const params = url.searchParams;
-
+  const recievedParams = url.searchParams;
+  params = recievedParams;
   next();
 };
 
-module.exports = assesParams;
+module.exports = {
+  assesParams,
+  params,
+};

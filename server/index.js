@@ -2,11 +2,10 @@ const chalk = require("chalk");
 const express = require("express");
 const debug = require("debug")("app:serverUtils");
 const morgan = require("morgan");
-const assesParams = require("../utils/paramUtils");
+const { assesParams } = require("../utils/paramUtils");
 const generalError = require("./errorHandlers");
 
 const app = express();
-let params;
 
 const startServer = (port) =>
   new Promise((resolve, reject) => {

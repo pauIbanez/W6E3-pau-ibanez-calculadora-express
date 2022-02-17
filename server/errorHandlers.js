@@ -1,6 +1,7 @@
 const chalk = require("chalk");
 const debug = require("debug")("app:errorHandler");
 
+// eslint-disable-next-line no-unused-vars
 const generalError = (err, req, res, next) => {
   debug(chalk.redBright(err.message));
 

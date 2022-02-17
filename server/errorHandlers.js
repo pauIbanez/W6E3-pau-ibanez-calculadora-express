@@ -4,7 +4,7 @@ const debug = require("debug")("app:errorHandler");
 const generalError = (err, req, res, next) => {
   debug(chalk.redBright(err.message));
 
-  if (err.message === "Metod is not get") {
+  if (err.methodError) {
     res.status(403);
     res.json({
       error: true,

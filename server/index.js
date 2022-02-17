@@ -42,6 +42,30 @@ app.get("/sum", (req, res) => {
     result,
   });
 });
+
+app.get("/substraction", (req, res) => {
+  const result = calculate(req.body.params[0], req.body.params[1], 2);
+  res.json({
+    operation: "substraction",
+    result,
+  });
+});
+
+app.get("/multiply", (req, res) => {
+  const result = calculate(req.body.params[0], req.body.params[1], 3);
+  res.json({
+    operation: "multiply",
+    result,
+  });
+});
+
+app.get("/division", (req, res) => {
+  const result = calculate(req.body.params[0], req.body.params[1], 4);
+  res.json({
+    operation: "division",
+    result,
+  });
+});
 app.use(generalError);
 
 module.exports = startServer;

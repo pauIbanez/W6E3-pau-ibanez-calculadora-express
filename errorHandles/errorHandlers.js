@@ -15,24 +15,24 @@ const resourceNotFound = (req, res) => {
 const generalError = (err, req, res, next) => {
   debug(chalk.redBright(err.message));
 
+  const generateErrorObject = (errorMessage) => ({
+    error: true,
+    message: errorMessage,
+  });
+
   switch (err.type) {
     case errorTypes.methodError:
       res.status(403);
-      res.json({
-        error: true,
-        message: err.message,
-      });
+      res.json(generateErrorObject(err.message));
       break;
 
     case errorTypes.paramsError:
       res.status(400);
-      res.json({
-        error: true,
-        message: err.message,
-      });
+      res.json(generateErrorObject(err.message));
       break;
     default:
-      res.status(500).send("Internal Server Error");
+      res.status(500);
+      res.json(generateErrorObject("Internal Server Error"));
   }
 };
 module.exports = { generalError, resourceNotFound };

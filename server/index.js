@@ -2,7 +2,7 @@ const chalk = require("chalk");
 const express = require("express");
 const debug = require("debug")("app:serverUtils");
 const morgan = require("morgan");
-const { assesParams } = require("../utils/paramUtils");
+const { assesParams, params } = require("../utils/paramUtils");
 const generalError = require("../errorHandles/errorHandlers");
 const errorTypes = require("../errorHandles/errorTypes");
 
@@ -33,6 +33,9 @@ app.use((req, res, next) => {
 
 app.use(assesParams);
 
+app.get("/sum", (req, res) => {
+  calculate(params);
+});
 app.use(generalError);
 
 module.exports = startServer;

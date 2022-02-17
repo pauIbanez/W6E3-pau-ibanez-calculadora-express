@@ -19,7 +19,7 @@ const assesParams = async (req, res, next) => {
     next(error);
     return;
   }
-  req.body = { params };
+  req.body = { ...req.body, params };
   next();
 };
 
